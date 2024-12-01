@@ -36,5 +36,4 @@ public class Review {
     @ManyToOne
     @JoinColumn(name = "clients_id")
     private Client clients;
-
 }
