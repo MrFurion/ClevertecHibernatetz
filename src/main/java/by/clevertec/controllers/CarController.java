@@ -46,13 +46,13 @@ public class CarController {
 //        carService.foundCarByBrandYearOfProductionCategoryPrice(carBrand, year, category, price);
 
         //list car search ASC
-//        carService.findCarsSortedByPriceAsc();
+        carService.findCarsSortedByPriceAsc();
 //
         //list car search DESC
 //        carService.findCarsSortedByPriceDesc();
 
         //foundAllCarWithPagination
-        carService.foundAllCars(1, 5);
+//        carService.foundAllCars(1, 5);
 
     }
 }

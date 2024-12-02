@@ -29,8 +29,16 @@ dependencies {
     annotationProcessor group: 'org.projectlombok', name: 'lombok', version: '1.18.30'
     compileOnly group: 'org.projectlombok', name: 'lombok', version: '1.18.30'
 
+    // Hibernate JCache
+    implementation 'org.hibernate.orm:hibernate-jcache:6.5.2.Final'
+
+    // Ehcache (с классификатором jakarta для Hibernate 6.x)
+    implementation 'javax.cache:cache-api:1.1.1'
+    implementation 'org.ehcache:ehcache:3.10.8:jakarta'
+
     testImplementation platform('org.junit:junit-bom:5.10.0')
     testImplementation 'org.junit.jupiter:junit-jupiter'
+
 }
 
 application {

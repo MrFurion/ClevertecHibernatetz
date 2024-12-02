@@ -20,6 +20,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -33,6 +35,7 @@ import java.util.List;
 @NoArgsConstructor
 @ToString
 @Builder
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Car {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -47,17 +50,21 @@ public class Car {
 
     @ManyToOne
     @JoinColumn(name = "car_showroom_id")
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     private CarShowroom showroom;
 
     @OneToMany(mappedBy = "cars", cascade = CascadeType.ALL, orphanRemoval = true)
     @Builder.Default
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     private List<Review> review = new ArrayList<>();
 
     @ManyToMany(mappedBy = "cars", cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH})
     @Builder.Default
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     private List<Client> clientas = new ArrayList<>();
 
     @ManyToOne
     @JoinColumn(name = "categori_id")
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     private Category categoryes;
 }
