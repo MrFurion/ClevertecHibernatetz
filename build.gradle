@@ -1,17 +1,54 @@
 plugins {
     id 'java'
+    id 'application'
 }
 
 group = 'by.clevertec'
 version = '1.0-SNAPSHOT'
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+}
 
 repositories {
     mavenCentral()
 }
 
 dependencies {
+    // Hibernate Core
+    implementation 'org.hibernate:hibernate-core:6.2.6.Final'
+
+    // PostgreSQL Driver
+    implementation 'org.postgresql:postgresql:42.7.2'
+
+    // Logging
+    implementation 'org.slf4j:slf4j-api:2.0.9'
+
+    // Lombok
+    annotationProcessor group: 'org.projectlombok', name: 'lombok', version: '1.18.30'
+    compileOnly group: 'org.projectlombok', name: 'lombok', version: '1.18.30'
+
+    // Hibernate JCache
+    implementation 'org.hibernate.orm:hibernate-jcache:6.5.2.Final'
+
+    // Ehcache (с классификатором jakarta для Hibernate 6.x)
+    implementation 'javax.cache:cache-api:1.1.1'
+    implementation 'org.ehcache:ehcache:3.10.8:jakarta'
+
+    //Apache Lucene
+    implementation 'org.hibernate.search:hibernate-search-engine:7.2.2.Final'
+    implementation 'org.hibernate.search:hibernate-search-mapper-orm:7.2.2.Final'
+    implementation 'org.hibernate.search:hibernate-search-backend-lucene:7.2.2.Final'
+    implementation 'org.hibernate.search:hibernate-search-mapper-pojo-base:7.2.2.Final'
+
     testImplementation platform('org.junit:junit-bom:5.10.0')
     testImplementation 'org.junit.jupiter:junit-jupiter'
+
+}
+
+application {
+    mainClass = 'by.clevertec.Main'
 }
 
 test {
