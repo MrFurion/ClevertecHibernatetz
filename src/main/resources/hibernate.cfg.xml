@@ -22,5 +22,10 @@
         <property name="hibernate.cache.region.factory_class">org.hibernate.cache.jcache.JCacheRegionFactory</property>
         <property name="hibernate.javax.cache.provider">org.ehcache.jsr107.EhcacheCachingProvider</property>
 
+        <!-- Hibernate Search Lucene settings -->
+        <property name="hibernate.search.backend.type">lucene</property>
+        <property name="hibernate.search.backend.directory.type">local-filesystem</property>
+        <property name="hibernate.search.backend.directory.root">./lucene-indexes</property>
+
     </session-factory>
 </hibernate-configuration>

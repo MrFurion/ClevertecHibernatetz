@@ -1,6 +1,6 @@
 package by.clevertec.services.impl;
 
-import by.clevertec.factory.ReviewFactory;
+import by.clevertec.factoryes.ReviewFactory;
 import by.clevertec.models.Car;
 import by.clevertec.models.Client;
 import by.clevertec.models.Review;
@@ -10,8 +10,12 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
+import org.hibernate.search.mapper.orm.Search;
+import org.hibernate.search.mapper.orm.session.SearchSession;
 
 import java.util.List;
+
+import static by.clevertec.util.HibernateUtil.initializeIndex;
 
 public class ReviewServiceImpl implements ReviewServices {
     @Override
@@ -77,6 +81,34 @@ public class ReviewServiceImpl implements ReviewServices {
         } catch (HibernateException e) {
             e.printStackTrace();
 
+        }
+    }
+
+    public void searchReviews(String keywords, Integer minRank, Integer maxRank) {
+        try (Session session = HibernateUtil.getSession()) {
+            SearchSession searchSession = Search.session(session);
+            initializeIndex(session);
+
+            var querys = searchSession.search(Review.class)
+                    .where(f -> f.bool(b -> {
+                        b.must(f.match()
+                                .fields("reviewText")
+                                .matching(keywords));
+                        if (minRank != null) {
+                            b.must(f.range()
+                                    .field("rank")
+                                    .atLeast(minRank));
+                        }
+                        if (maxRank != null) {
+                            b.must(f.range()
+                                    .field("rank")
+                                    .atMost(maxRank));
+                        }
+                    }))
+                    .fetchAllHits();
+            for (var query : querys) {
+                System.out.println(query.getReviewText());
+            }
         }
     }
 }

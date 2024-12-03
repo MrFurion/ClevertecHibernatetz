@@ -1,6 +1,6 @@
 package by.clevertec.services.impl;
 
-import by.clevertec.factory.CategoryFactory;
+import by.clevertec.factoryes.CategoryFactory;
 import by.clevertec.models.Car;
 import by.clevertec.models.Category;
 import by.clevertec.services.CategoryServices;

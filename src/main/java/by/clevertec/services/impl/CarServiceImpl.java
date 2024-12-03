@@ -2,7 +2,7 @@ package by.clevertec.services.impl;
 
 import by.clevertec.enums.car.CarBrand;
 import by.clevertec.enums.category.CarCategory;
-import by.clevertec.factory.CarFactory;
+import by.clevertec.factoryes.CarFactory;
 import by.clevertec.models.Car;
 import by.clevertec.models.CarShowroom;
 import by.clevertec.services.CarServices;

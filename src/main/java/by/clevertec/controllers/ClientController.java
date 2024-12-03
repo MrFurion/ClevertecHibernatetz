@@ -1,7 +1,5 @@
 package by.clevertec.controllers;
 
-import by.clevertec.factory.ClientFactory;
-import by.clevertec.models.Client;
 import by.clevertec.services.ClientServices;
 import by.clevertec.services.impl.ClientServiceImpl;
 

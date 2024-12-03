@@ -1,6 +1,6 @@
 package by.clevertec.services.impl;
 
-import by.clevertec.factory.CarShowroomFactory;
+import by.clevertec.factoryes.CarShowroomFactory;
 import by.clevertec.models.CarShowroom;
 import by.clevertec.services.CarShowroomsServices;
 import by.clevertec.util.HibernateUtil;

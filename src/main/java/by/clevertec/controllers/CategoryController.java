@@ -1,6 +1,5 @@
 package by.clevertec.controllers;
 
-import by.clevertec.factory.CategoryFactory;
 import by.clevertec.services.CategoryServices;
 import by.clevertec.services.impl.CategoryServiceImpl;
 

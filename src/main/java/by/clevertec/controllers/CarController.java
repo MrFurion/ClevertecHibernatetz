@@ -1,19 +1,9 @@
 package by.clevertec.controllers;
 
-import by.clevertec.enums.car.CarBrand;
-import by.clevertec.enums.category.CarCategory;
-import by.clevertec.factory.CarFactory;
-import by.clevertec.factory.CarShowroomFactory;
-import by.clevertec.models.Car;
-import by.clevertec.models.CarShowroom;
-import by.clevertec.models.Category;
 import by.clevertec.services.CarServices;
 import by.clevertec.services.CarShowroomsServices;
 import by.clevertec.services.impl.CarServiceImpl;
 import by.clevertec.services.impl.CarShowroomServiceImpl;
-
-import java.time.LocalDate;
-import java.util.List;
 
 public class CarController {
     public static void main(String[] args) {
