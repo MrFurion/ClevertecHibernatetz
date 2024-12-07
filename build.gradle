@@ -17,16 +17,25 @@ repositories {
 }
 
 dependencies {
+    // Основная библиотека Jackson
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.15.2'
+
+    // Модуль для работы с датами и временем (если используется Java 8+)
+    implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.15.2'
+
+    // Модуль для аннотаций (если нужно)
+    implementation 'com.fasterxml.jackson.core:jackson-annotations:2.15.2'
     // https://mvnrepository.com/artifact/org.springframework.data/spring-data-jpa
     implementation group: 'org.springframework.data', name: 'spring-data-jpa', version: '3.3.5'
 // https://mvnrepository.com/artifact/org.springframework/spring-context
-    implementation group: 'org.springframework', name: 'spring-context', version: '6.1.14'
+    implementation group: 'org.springframework', name: 'spring-context', version: '5.3.5'
 // https://mvnrepository.com/artifact/org.springframework/spring-core
-    implementation group: 'org.springframework', name: 'spring-core', version: '6.1.14'
+    implementation group: 'org.springframework', name: 'spring-core', version: '5.3.5'
 // https://mvnrepository.com/artifact/org.springframework/spring-web
-    implementation group: 'org.springframework', name: 'spring-web', version: '6.1.14'
+    implementation group: 'org.springframework', name: 'spring-web', version: '5.3.5'
     // https://mvnrepository.com/artifact/org.springframework/spring-webmvc
-    implementation group: 'org.springframework', name: 'spring-webmvc', version: '6.1.14'
+    implementation group: 'org.springframework', name: 'spring-webmvc', version: '5.3.5'
+
     compileOnly 'javax.servlet:javax.servlet-api:4.0.1'
 
     // Hibernate Core
