@@ -1,14 +1,31 @@
 package by.clevertec.controllers;
 
+import by.clevertec.models.Car;
 import by.clevertec.services.CarServices;
 import by.clevertec.services.CarShowroomsServices;
 import by.clevertec.services.impl.CarServiceImpl;
 import by.clevertec.services.impl.CarShowroomServiceImpl;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
+@RestController
+@RequestMapping("/app/cars")
 public class CarController {
-    public static void main(String[] args) {
-        CarServices carService = new CarServiceImpl();
-        CarShowroomsServices carShowroomsServices = new CarShowroomServiceImpl();
+    private CarServices carService;
+
+    @GetMapping
+    public ResponseEntity<List<Car>> show(){
+        List<Car> car = carService.foundCarAll();
+        return ResponseEntity.ok(car);
+    }
+
+//    public static void main(String[] args) {
+//        CarServices carService = new CarServiceImpl();
+//        CarShowroomsServices carShowroomsServices = new CarShowroomServiceImpl();
 
         // add new car
 //        carService.addCar();
@@ -36,7 +53,7 @@ public class CarController {
 //        carService.foundCarByBrandYearOfProductionCategoryPrice(carBrand, year, category, price);
 
         //list car search ASC
-        carService.findCarsSortedByPriceAsc();
+//        carService.findCarsSortedByPriceAsc();
 //
         //list car search DESC
 //        carService.findCarsSortedByPriceDesc();
@@ -44,5 +61,6 @@ public class CarController {
         //foundAllCarWithPagination
 //        carService.foundAllCars(1, 5);
 
-    }
+
+//    }
 }

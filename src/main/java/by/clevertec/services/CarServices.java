@@ -6,6 +6,7 @@ import by.clevertec.models.Car;
 import by.clevertec.models.CarShowroom;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public interface CarServices {
     void foundCarById(Long id);
@@ -28,4 +29,5 @@ public interface CarServices {
     void deleteCarById(Long id);
 
     void assignCarToShowroom(Car car, CarShowroom showroom);
+    List<Car> foundCarAll();
 }

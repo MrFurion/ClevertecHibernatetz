@@ -5,22 +5,32 @@ import by.clevertec.enums.category.CarCategory;
 import by.clevertec.factoryes.CarFactory;
 import by.clevertec.models.Car;
 import by.clevertec.models.CarShowroom;
+import by.clevertec.repositories.CarRepository;
 import by.clevertec.services.CarServices;
 import by.clevertec.util.HibernateUtil;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Root;
+import lombok.RequiredArgsConstructor;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Service
+@Transactional(readOnly = true)
+@RequiredArgsConstructor
 public class CarServiceImpl implements CarServices {
+
+    private final CarRepository carRepository;
+
 
     @Override
     public void foundCarById(Long id) {
@@ -33,6 +43,11 @@ public class CarServiceImpl implements CarServices {
         } catch (HibernateException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public List<Car> foundCarAll() {
+        return carRepository.findAll();
     }
 
     @Override
