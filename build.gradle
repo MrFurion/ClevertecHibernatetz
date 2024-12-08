@@ -17,53 +17,37 @@ repositories {
 }
 
 dependencies {
-    // Основная библиотека Jackson
+    // Spring dependencies
+    implementation 'org.springframework:spring-core:5.3.5'
+    implementation 'org.springframework:spring-context:5.3.5'
+    implementation 'org.springframework:spring-web:5.3.5'
+    implementation 'org.springframework:spring-webmvc:5.3.5'
+    implementation 'org.springframework:spring-jdbc:5.3.5'
+    implementation 'org.springframework.data:spring-data-jpa:2.4.7'
+    implementation 'org.springframework:spring-orm:5.3.5'
+
+    //Jackson
     implementation 'com.fasterxml.jackson.core:jackson-databind:2.15.2'
+    implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310'
 
-    // Модуль для работы с датами и временем (если используется Java 8+)
-    implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.15.2'
+    //Mapstruct
+    implementation 'org.mapstruct:mapstruct:1.5.5.Final'
+    annotationProcessor "org.mapstruct:mapstruct-processor:1.5.5.Final"
 
-    // Модуль для аннотаций (если нужно)
-    implementation 'com.fasterxml.jackson.core:jackson-annotations:2.15.2'
-    // https://mvnrepository.com/artifact/org.springframework.data/spring-data-jpa
-    implementation group: 'org.springframework.data', name: 'spring-data-jpa', version: '3.3.5'
-// https://mvnrepository.com/artifact/org.springframework/spring-context
-    implementation group: 'org.springframework', name: 'spring-context', version: '5.3.5'
-// https://mvnrepository.com/artifact/org.springframework/spring-core
-    implementation group: 'org.springframework', name: 'spring-core', version: '5.3.5'
-// https://mvnrepository.com/artifact/org.springframework/spring-web
-    implementation group: 'org.springframework', name: 'spring-web', version: '5.3.5'
-    // https://mvnrepository.com/artifact/org.springframework/spring-webmvc
-    implementation group: 'org.springframework', name: 'spring-webmvc', version: '5.3.5'
-
-    compileOnly 'javax.servlet:javax.servlet-api:4.0.1'
-
-    // Hibernate Core
-    implementation 'org.hibernate:hibernate-core:6.2.6.Final'
-
-    // PostgreSQL Driver
-    implementation 'org.postgresql:postgresql:42.7.2'
-
-    // Logging
-    implementation 'org.slf4j:slf4j-api:2.0.9'
 
     // Lombok
     annotationProcessor group: 'org.projectlombok', name: 'lombok', version: '1.18.30'
     compileOnly group: 'org.projectlombok', name: 'lombok', version: '1.18.30'
 
-    // Hibernate JCache
-    implementation 'org.hibernate.orm:hibernate-jcache:6.5.2.Final'
+    // Hibernate dependencies
+    implementation 'org.hibernate:hibernate-core:5.4.28.Final'
+    implementation 'org.hibernate.validator:hibernate-validator:6.1.6.Final'
 
-    // Ehcache (с классификатором jakarta для Hibernate 6.x)
-    implementation 'javax.cache:cache-api:1.1.1'
-    implementation 'org.ehcache:ehcache:3.10.8:jakarta'
+    // Database dependencies
+    implementation 'org.postgresql:postgresql:42.2.18'
 
-    //Apache Lucene
-    implementation 'org.hibernate.search:hibernate-search-engine:7.2.2.Final'
-    implementation 'org.hibernate.search:hibernate-search-mapper-orm:7.2.2.Final'
-    implementation 'org.hibernate.search:hibernate-search-backend-lucene:7.2.2.Final'
-    implementation 'org.hibernate.search:hibernate-search-mapper-pojo-base:7.2.2.Final'
-
+    // Servlet API (provided, as it is handled by the server)
+    providedCompile 'javax.servlet:javax.servlet-api:4.0.1'
     testImplementation platform('org.junit:junit-bom:5.10.0')
     testImplementation 'org.junit.jupiter:junit-jupiter'
 

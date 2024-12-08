@@ -1,66 +1,77 @@
 package by.clevertec.controllers;
 
+import by.clevertec.dto.CarDtoRequest;
+import by.clevertec.dto.CarDtoResponse;
+import by.clevertec.exception.CarNotFoundException;
 import by.clevertec.models.Car;
 import by.clevertec.services.CarServices;
-import by.clevertec.services.CarShowroomsServices;
-import by.clevertec.services.impl.CarServiceImpl;
-import by.clevertec.services.impl.CarShowroomServiceImpl;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
+import java.net.URI;
+import java.util.HashMap;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/app/cars")
+@RequiredArgsConstructor
 public class CarController {
-    private CarServices carService;
+    private final CarServices carService;
 
-    @GetMapping
-    public ResponseEntity<List<Car>> show(){
-        List<Car> car = carService.foundCarAll();
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Car> show(@PathVariable Long id) {
+        Car car = carService.foundCarById(id);
         return ResponseEntity.ok(car);
     }
 
-//    public static void main(String[] args) {
-//        CarServices carService = new CarServiceImpl();
-//        CarShowroomsServices carShowroomsServices = new CarShowroomServiceImpl();
+    @PostMapping
+    public ResponseEntity<String> creat(@Validated @RequestBody CarDtoRequest carDtoRequest) {
+        System.out.println("1----");
+        System.out.println(carDtoRequest.toString());
+        carService.creat(carDtoRequest);
+        return ResponseEntity.created(URI.create("/app/cars")).body("Car successfully created : " + carDtoRequest);
+    }
 
-        // add new car
-//        carService.addCar();
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> delete(@PathVariable Long id) {
+        try {
+            carService.delete(id);
+            return ResponseEntity.ok("Car successfully deleted with id: " + id);
+        } catch (CarNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Car not found with id: " + id);
+        }
+    }
 
-        //delete car
-//        carService.deleteCarById(1L);
+    @PutMapping("/{id}")
+    public ResponseEntity<Map<String, Object>> update(@PathVariable Long id,
+                                                      @Validated @RequestBody CarDtoRequest carDtoRequest) {
 
-        //update car
-//        carService.updateCar(CarFactory.getCar(), 2L);
+        CarDtoResponse carDtoResponse = carService.update(carDtoRequest, id);
 
-        //join CarShowroom with Car
-//        carService.foundAllCars(1, 5);
-//        carShowroomsServices.findAllCarShowrooms();
-//        Car car = new Car();
-//        car.setId(4L);
-//        CarShowroom carShowroom = new CarShowroom();
-//        carShowroom.setId(2L);
-//        carService.assignCarToShowroom(car, carShowroom);
+        Map<String, Object> response = new HashMap<>();
+        response.put("message", "Car successfully updated.");
+        response.put("updatedCar", carDtoResponse);
 
-        //search Brand YearOfProduction Category Price
-//        CarBrand carBrand = CarBrand.DODGE;
-//        LocalDate year = LocalDate.of(2005,2,2);
-//        CarCategory category = CarCategory.COUPE;
-//        String price = "10000-12000";
-//        carService.foundCarByBrandYearOfProductionCategoryPrice(carBrand, year, category, price);
+        return ResponseEntity.ok(response);
+    }
 
-        //list car search ASC
-//        carService.findCarsSortedByPriceAsc();
-//
-        //list car search DESC
-//        carService.findCarsSortedByPriceDesc();
-
-        //foundAllCarWithPagination
-//        carService.foundAllCars(1, 5);
-
-
-//    }
+    @PatchMapping("/{carId}/showroom/{showroomId}")
+    public ResponseEntity<String> assignCarToShowroom(
+            @PathVariable Long carId,
+            @PathVariable Long showroomId) {
+        carService.assignCarToShowroom(carId, showroomId);
+        return ResponseEntity.ok("Car assigned to showroom successfully!");
+    }
 }

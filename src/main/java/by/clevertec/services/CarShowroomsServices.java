@@ -1,10 +1,12 @@
 package by.clevertec.services;
 
-import by.clevertec.models.CarShowroom;
+import by.clevertec.dto.CarShowroomDtoRequest;
+import by.clevertec.dto.CarShowroomDtoResponse;
 
 public interface CarShowroomsServices {
-    void addCarShowroom();
-    void removeCarShowroom(Long id);
-    void updateCarShowroom(CarShowroom carShowroom, Long id);
-    void findAllCarShowrooms();
+    void create(CarShowroomDtoRequest request);
+
+    void delete(Long id);
+
+    CarShowroomDtoResponse update(CarShowroomDtoRequest carShowroomDtoRequest, Long id);
 }

@@ -1,8 +1,9 @@
 package by.clevertec.enums;
 
 import by.clevertec.interfaces.Describable;
-import jakarta.persistence.AttributeConverter;
 
+
+import javax.persistence.AttributeConverter;
 import java.util.Arrays;
 
 public abstract class EnumConverter<T extends Enum<T> & Describable> implements AttributeConverter<T, String> {

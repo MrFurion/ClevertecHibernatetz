@@ -7,5 +7,5 @@ public interface ReviewServices {
     void deleteReview(Long id);
     void updateReview(Long id);
     void searchReviewsByKeywords(String keywords);
-    void searchReviews(String keywords, Integer minRank, Integer maxRank);
+//    void searchReviews(String keywords, Integer minRank, Integer maxRank);
 }

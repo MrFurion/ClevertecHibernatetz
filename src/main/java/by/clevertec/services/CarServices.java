@@ -1,33 +1,18 @@
 package by.clevertec.services;
 
-import by.clevertec.enums.car.CarBrand;
-import by.clevertec.enums.category.CarCategory;
+import by.clevertec.dto.CarDtoRequest;
+import by.clevertec.dto.CarDtoResponse;
 import by.clevertec.models.Car;
-import by.clevertec.models.CarShowroom;
 
-import java.time.LocalDate;
-import java.util.List;
 
 public interface CarServices {
-    void foundCarById(Long id);
+    Car foundCarById(Long id);
 
-    void foundCarByBrandYearOfProductionCategoryPrice(CarBrand carBrand,
-                                                      LocalDate yearOfProduction,
-                                                      CarCategory category,
-                                                      String price);
+    void creat(CarDtoRequest carDtoResponse);
 
-    void findCarsSortedByPriceAsc();
+    CarDtoResponse update(CarDtoRequest carDtoResponse, long id);
 
-    void findCarsSortedByPriceDesc();
+    void delete(Long id);
 
-    void foundAllCars(int pageNumber, int pageSize);
-
-    void addCar();
-
-    void updateCar(Car car, long id);
-
-    void deleteCarById(Long id);
-
-    void assignCarToShowroom(Car car, CarShowroom showroom);
-    List<Car> foundCarAll();
+    void assignCarToShowroom(Long carId, Long showroomId);
 }
