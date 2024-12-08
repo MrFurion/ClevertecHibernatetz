@@ -1,11 +1,12 @@
 package by.clevertec.services;
 
+import by.clevertec.dto.CategoryDtoRequest;
 import by.clevertec.models.Category;
 
-import java.util.List;
-
 public interface CategoryServices {
-    void create();
+    void create(CategoryDtoRequest categoryDtoRequest);
+
     void delete(Long id);
+
     void update(Category category, Long id);
 }
