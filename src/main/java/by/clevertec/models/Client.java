@@ -54,7 +54,7 @@ public class Client {
 
     private LocalDate dateOfRegistration;
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "client_car",
             joinColumns = @JoinColumn(name = "client_id"),

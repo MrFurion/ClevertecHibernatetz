@@ -24,5 +24,5 @@ public class CategoryDtoRequest {
     @Convert(converter = CarCategoryConverter.class)
     @NotNull(message = "BrandCar not should by empty")
     @EnumValidator(enumClass = CarCategory.class, message = "Invalid category. Must match one of: SEDAN, HATCHBACK, CROSSOVER, etc.")
-    private CarCategory carCategory;
+    private String carCategory;
 }

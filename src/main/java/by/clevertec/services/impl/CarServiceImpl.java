@@ -3,7 +3,7 @@ package by.clevertec.services.impl;
 import by.clevertec.dto.CarDtoRequest;
 import by.clevertec.dto.CarDtoResponse;
 import by.clevertec.exception.CarNotFoundException;
-import by.clevertec.exception.CarShowroomNorFoundException;
+import by.clevertec.exception.CarShowroomNotFoundException;
 import by.clevertec.mapper.CarMapper;
 import by.clevertec.models.Car;
 import by.clevertec.models.CarShowroom;
@@ -75,7 +75,7 @@ public class CarServiceImpl implements CarServices {
     public void assignCarToShowroom(Long carId, Long showroomId) {
         carRepository.findById(carId).orElseThrow(() -> new CarNotFoundException("Car not found with id: " + carId));
         CarShowroom showroom = carShowroomRepository.findById(showroomId)
-                .orElseThrow(() -> new CarShowroomNorFoundException("Showroom not found with ID: " + showroomId));
+                .orElseThrow(() -> new CarShowroomNotFoundException("Showroom not found with ID: " + showroomId));
         carRepository.assignCarToShowroom(carId, showroom);
     }
 }

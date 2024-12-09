@@ -38,8 +38,6 @@ public class CarController {
 
     @PostMapping
     public ResponseEntity<String> creat(@Validated @RequestBody CarDtoRequest carDtoRequest) {
-        System.out.println("1----");
-        System.out.println(carDtoRequest.toString());
         carService.creat(carDtoRequest);
         return ResponseEntity.created(URI.create("/app/cars")).body("Car successfully created : " + carDtoRequest);
     }

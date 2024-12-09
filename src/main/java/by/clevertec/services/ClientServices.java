@@ -6,5 +6,5 @@ public interface ClientServices {
     void createClient();
     void updateClient(Client clientUpdate, Long id);
     void deleteClient(Long id);
-    void buyCar(Long clientId, Long carId);
+
 }

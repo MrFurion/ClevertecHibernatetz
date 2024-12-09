@@ -3,6 +3,7 @@ package by.clevertec.controllers;
 import by.clevertec.dto.CarShowroomDtoRequest;
 import by.clevertec.dto.CarShowroomDtoResponse;
 import by.clevertec.exception.CarNotFoundException;
+import by.clevertec.exception.CarShowroomNotFoundException;
 import by.clevertec.services.CarShowroomsServices;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -39,7 +40,7 @@ public class CarShowroomController {
         try {
             carShowroomsServices.delete(id);
             return ResponseEntity.ok("CarShowroom successfully deleted with id: " + id);
-        } catch (CarNotFoundException e) {
+        } catch (CarShowroomNotFoundException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("CarShowroom not found with id: " + id);
         }
     }

@@ -1,9 +1,12 @@
 package by.clevertec.enums.category;
 
 import by.clevertec.interfaces.Describable;
+import by.clevertec.util.CarCategoryDeserializer;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import lombok.Getter;
 
 @Getter
+@JsonDeserialize(using = CarCategoryDeserializer.class)
 public enum CarCategory implements Describable {
     SEDAN("Седан"),
     HATCHBACK("Хэтчбек"),

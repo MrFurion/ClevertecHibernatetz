@@ -1,6 +1,7 @@
 package by.clevertec.mapper;
 
 import by.clevertec.dto.CategoryDtoRequest;
+import by.clevertec.dto.CategoryDtoResponse;
 import by.clevertec.models.Category;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -15,4 +16,7 @@ public interface CategoryMapper {
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "cars", ignore = true)
     Category toCategory(CategoryDtoRequest categoryDtoRequest);
+
+
+    CategoryDtoResponse toCategoryDtoResponse(Category category);
 }

@@ -3,7 +3,7 @@ package by.clevertec.services.impl;
 import by.clevertec.dto.CarShowroomDtoRequest;
 import by.clevertec.dto.CarShowroomDtoResponse;
 import by.clevertec.exception.CarNotFoundException;
-import by.clevertec.exception.CarShowroomNorFoundException;
+import by.clevertec.exception.CarShowroomNotFoundException;
 import by.clevertec.mapper.CarSowroomMapper;
 import by.clevertec.models.CarShowroom;
 import by.clevertec.repositories.CarShowroomRepository;
@@ -52,7 +52,7 @@ public class CarShowroomServiceImpl implements CarShowroomsServices {
             return carSowroomMapper.toCarDtoResponse(carShowroom);
         } else {
             log.error("CarShowroom not found with id: " + id);
-            throw new CarShowroomNorFoundException("CarShowroom not found with id: " + id);
+            throw new CarShowroomNotFoundException("CarShowroom not found with id: " + id);
         }
     }
 }

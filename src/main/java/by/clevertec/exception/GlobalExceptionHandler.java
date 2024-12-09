@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 
-import javax.persistence.EntityNotFoundException;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -25,11 +25,18 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(errorDetails, HttpStatus.NOT_FOUND);
     }
 
-    @ExceptionHandler(CarShowroomNorFoundException.class)
-    public ResponseEntity<Object> handleCarShowroomNotFoundException(CarShowroomNorFoundException exception) {
+    @ExceptionHandler(CarShowroomNotFoundException.class)
+    public ResponseEntity<Object> handleCarShowroomNotFoundException(CarShowroomNotFoundException exception) {
         ErrorDetails errorDetails = new ErrorDetails(HttpStatus.NOT_FOUND, exception.getMessage(), "CarShowroom not found");
         return new ResponseEntity<>(errorDetails, HttpStatus.NOT_FOUND);
     }
+
+    @ExceptionHandler(CategoryNotFoundException.class)
+    public ResponseEntity<Object> handleCategoryNotFoundException(CategoryNotFoundException exception) {
+        ErrorDetails errorDetails = new ErrorDetails(HttpStatus.NOT_FOUND, exception.getMessage(), "Category not found");
+        return new ResponseEntity<>(errorDetails, HttpStatus.NOT_FOUND);
+    }
+
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<Object> handleUnknownException(Exception exception) {
@@ -51,8 +58,25 @@ public class GlobalExceptionHandler {
         errorDetails.setErrors(errors);
         return new ResponseEntity<>(errorDetails, HttpStatus.BAD_REQUEST);
     }
+
     @ExceptionHandler(HttpMessageNotReadableException.class)
     public ResponseEntity<String> handleInvalidDateFormat() {
         return ResponseEntity.badRequest().body("Invalid date format. Expected format is yyyy-MM-dd.");
+    }
+
+    @ExceptionHandler(com.fasterxml.jackson.databind.exc.InvalidFormatException.class)
+    public ResponseEntity<?> handleInvalidFormatException(com.fasterxml.jackson.databind.exc.InvalidFormatException ex) {
+        if (ex.getTargetType().isEnum()) {
+            String enumValues = Arrays.toString(ex.getTargetType().getEnumConstants());
+            return ResponseEntity.badRequest()
+                    .body(Map.of(
+                            "status", "BAD_REQUEST",
+                            "message", "Invalid value for enum " + ex.getTargetType().getSimpleName() +
+                                    ". Must be one of: " + enumValues,
+                            "invalidValue", ex.getValue()
+                    ));
+        }
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                .body("An unexpected error occurred.");
     }
 }
