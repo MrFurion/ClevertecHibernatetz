@@ -17,26 +17,38 @@ import java.util.Map;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
     public static final String DESCRIPTION = "description";
+    public static final String ENTITY_NOT_FOUND = " not found";
 
 
     @ExceptionHandler(CarNotFoundException.class)
     public ResponseEntity<Object> handleCarNotFoundException(CarNotFoundException exception) {
-        ErrorDetails errorDetails = new ErrorDetails(HttpStatus.NOT_FOUND, exception.getMessage(), "Car not found");
+        ErrorDetails errorDetails = new ErrorDetails(HttpStatus.NOT_FOUND, exception.getMessage(), "Car" + ENTITY_NOT_FOUND);
         return new ResponseEntity<>(errorDetails, HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler(CarShowroomNotFoundException.class)
     public ResponseEntity<Object> handleCarShowroomNotFoundException(CarShowroomNotFoundException exception) {
-        ErrorDetails errorDetails = new ErrorDetails(HttpStatus.NOT_FOUND, exception.getMessage(), "CarShowroom not found");
+        ErrorDetails errorDetails = new ErrorDetails(HttpStatus.NOT_FOUND, exception.getMessage(), "CarShowroom" + ENTITY_NOT_FOUND);
         return new ResponseEntity<>(errorDetails, HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler(CategoryNotFoundException.class)
     public ResponseEntity<Object> handleCategoryNotFoundException(CategoryNotFoundException exception) {
-        ErrorDetails errorDetails = new ErrorDetails(HttpStatus.NOT_FOUND, exception.getMessage(), "Category not found");
+        ErrorDetails errorDetails = new ErrorDetails(HttpStatus.NOT_FOUND, exception.getMessage(), "Category" + ENTITY_NOT_FOUND);
         return new ResponseEntity<>(errorDetails, HttpStatus.NOT_FOUND);
     }
 
+    @ExceptionHandler(ClientNotFoundException.class)
+    public ResponseEntity<Object> handleClientNotFoundException(ClientNotFoundException exception) {
+        ErrorDetails errorDetails = new ErrorDetails(HttpStatus.NOT_FOUND, exception.getMessage(), "Client" + ENTITY_NOT_FOUND);
+        return new ResponseEntity<>(errorDetails, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(ReviewNotFoundException.class)
+    public ResponseEntity<Object> handleReviewNotFoundException(ReviewNotFoundException exception) {
+        ErrorDetails errorDetails = new ErrorDetails(HttpStatus.NOT_FOUND, exception.getMessage(), "Review" + ENTITY_NOT_FOUND);
+        return new ResponseEntity<>(errorDetails, HttpStatus.NOT_FOUND);
+    }
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<Object> handleUnknownException(Exception exception) {

@@ -30,7 +30,7 @@ public class CategoryController {
     @PostMapping
     public ResponseEntity<String> creat(@Validated @RequestBody CategoryDtoRequest categoryDtoRequest) {
         categoryServices.create(categoryDtoRequest);
-        return ResponseEntity.created(URI.create("/app/categories")).body("Categories successfully created : " + categoryDtoRequest);
+        return ResponseEntity.created(URI.create("/app/categories")).body("Category successfully created : " + categoryDtoRequest);
     }
 
     @DeleteMapping("/{id}")

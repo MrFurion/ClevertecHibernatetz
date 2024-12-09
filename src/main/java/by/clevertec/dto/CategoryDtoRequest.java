@@ -11,7 +11,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.Convert;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotEmpty;
 
 @Getter
 @Setter
@@ -22,7 +22,7 @@ import javax.validation.constraints.NotNull;
 public class CategoryDtoRequest {
 
     @Convert(converter = CarCategoryConverter.class)
-    @NotNull(message = "BrandCar not should by empty")
+    @NotEmpty(message = "BrandCar not should by empty")
     @EnumValidator(enumClass = CarCategory.class, message = "Invalid category. Must match one of: SEDAN, HATCHBACK, CROSSOVER, etc.")
     private String carCategory;
 }

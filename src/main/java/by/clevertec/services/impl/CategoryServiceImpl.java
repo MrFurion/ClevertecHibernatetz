@@ -37,7 +37,7 @@ public class CategoryServiceImpl implements CategoryServices {
     @Transactional
     public void delete(Long id) {
         if (!categoryRepository.existsById(id)) {
-            throw new CarNotFoundException("Category not found with id: " + id);
+            throw new CategoryNotFoundException("Category not found with id: " + id);
         }
         categoryRepository.deleteById(id);
     }
@@ -55,10 +55,8 @@ public class CategoryServiceImpl implements CategoryServices {
                     .ifPresent(category::setCarCategory);
             categoryRepository.save(category);
 
-            CategoryDtoResponse categoryDtoResponse = categoryMapper.toCategoryDtoResponse(category);
-
-            System.out.println(categoryDtoResponse.getCarCategory()+ "<------------");
             return categoryMapper.toCategoryDtoResponse(category);
+
         } else {
             log.error("Category not found with id: " + id);
             throw new CategoryNotFoundException("Category not found with id: " + id);

@@ -1,10 +1,12 @@
 package by.clevertec.services;
 
-import by.clevertec.models.Client;
+import by.clevertec.dto.ClientDtoRequest;
+import by.clevertec.dto.ClientDtoResponse;
 
 public interface ClientServices {
-    void createClient();
-    void updateClient(Client clientUpdate, Long id);
-    void deleteClient(Long id);
+    void create(ClientDtoRequest request);
 
+    ClientDtoResponse update(ClientDtoRequest clientDtoRequest, Long id);
+
+    void delete(Long id);
 }
