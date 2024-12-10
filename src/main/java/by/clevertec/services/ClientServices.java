@@ -9,4 +9,6 @@ public interface ClientServices {
     ClientDtoResponse update(ClientDtoRequest clientDtoRequest, Long id);
 
     void delete(Long id);
+
+    void bayCar(Long clientId, Long bayId);
 }

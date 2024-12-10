@@ -29,11 +29,7 @@ public class Review {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-//    @FullTextField(analyzer = "standard")
     private String reviewText;
-
-//    @GenericField
     private int rank;
     @ManyToOne
     private Client client;

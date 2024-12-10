@@ -1,11 +1,13 @@
 package by.clevertec.services.impl;
 
-import by.clevertec.dto.CategoryDtoResponse;
 import by.clevertec.dto.ClientDtoRequest;
 import by.clevertec.dto.ClientDtoResponse;
+import by.clevertec.exception.CarNotFoundException;
 import by.clevertec.exception.ClientNotFoundException;
 import by.clevertec.mapper.ClientMapper;
+import by.clevertec.models.Car;
 import by.clevertec.models.Client;
+import by.clevertec.repositories.CarRepository;
 import by.clevertec.repositories.ClientRepository;
 import by.clevertec.services.ClientServices;
 import lombok.RequiredArgsConstructor;
@@ -23,6 +25,7 @@ import java.util.Optional;
 public class ClientServiceImpl implements ClientServices {
 
     private final ClientRepository clientRepository;
+    private final CarRepository carRepository;
     private final ClientMapper clientMapper;
 
     @Override
@@ -46,8 +49,8 @@ public class ClientServiceImpl implements ClientServices {
             clientRepository.save(client);
             return clientMapper.toClientDtoResponse(client);
         } else {
-            log.error("Client not found with id " +  id);
-            throw new ClientNotFoundException("Client not found with id " +  id);
+            log.error("Client not found with id " + id);
+            throw new ClientNotFoundException("Client not found with id " + id);
         }
     }
 
@@ -58,5 +61,21 @@ public class ClientServiceImpl implements ClientServices {
             throw new ClientNotFoundException("Client not found with id: " + id);
         }
         clientRepository.deleteById(id);
+    }
+
+    @Override
+    @Transactional
+    public void bayCar(Long clientId, Long carId) {
+        Client client = clientRepository.findById(clientId)
+                .orElseThrow(() -> new ClientNotFoundException("Client not found with id: " + clientId));
+        log.error("Client not found with id: " + clientId);
+
+        Car car = carRepository.findById(carId)
+                .orElseThrow(() -> new CarNotFoundException("Car not found with id " + carId));
+        log.error("Car not found with id " + carId);
+
+        client.getCars().add(car);
+
+        clientRepository.save(client);
     }
 }
