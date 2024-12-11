@@ -26,6 +26,9 @@ dependencies {
     implementation 'org.springframework.data:spring-data-jpa:2.4.7'
     implementation 'org.springframework:spring-orm:5.3.5'
 
+    //yml
+    implementation 'org.yaml:snakeyaml:1.26'
+
     //Jackson
     implementation 'com.fasterxml.jackson.core:jackson-databind:2.15.2'
     implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310'
@@ -44,7 +47,7 @@ dependencies {
     implementation 'org.hibernate.validator:hibernate-validator:6.1.6.Final'
 
     // Database dependencies
-    implementation 'org.postgresql:postgresql:42.2.18'
+    implementation 'org.postgresql:postgresql:42.6.0'
 
     // Servlet API (provided, as it is handled by the server)
     providedCompile 'javax.servlet:javax.servlet-api:4.0.1'

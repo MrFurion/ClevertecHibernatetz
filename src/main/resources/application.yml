@@ -1,13 +1,14 @@
-spring:
-  datasource:
-    url: jdbc:postgresql://localhost:5433/hibernate
-    username: root
-    password: root
-    driver-class-name: org.postgresql.Driver
+# Database Configuration (Data Source)
+datasource:
+  url: jdbc:postgresql://localhost:5433/hibernate
+  driver_class: org.postgresql.Driver
+  username: root
+  password: root
 
-  jpa:
-    hibernate:
-      ddl-auto: update
-    properties:
-      hibernate:
-        dialect: org.hibernate.dialect.PostgreSQLDialect
+# Hibernate Settings
+hibernate:
+  dialect: org.hibernate.dialect.PostgreSQLDialect
+  show_sql: true
+
+liquibase:
+  changelog: changelog/changelog-master.yaml

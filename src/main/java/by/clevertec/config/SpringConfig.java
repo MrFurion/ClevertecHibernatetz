@@ -1,11 +1,20 @@
 package by.clevertec.config;
 
+import by.clevertec.util.YamlPropertyLoader;
+import lombok.Data;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
+import org.springframework.beans.factory.config.YamlPropertiesFactoryBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.core.env.Environment;
+import org.springframework.core.env.StandardEnvironment;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.JpaTransactionManager;
@@ -21,7 +30,7 @@ import java.util.Properties;
 
 @Configuration
 @ComponentScan("by.clevertec")
-@PropertySource("classpath:hibernate.properties")
+@PropertySource(value = "classpath:application.yml", factory = YamlPropertyLoader.class)
 @EnableTransactionManagement
 @EnableJpaRepositories("by.clevertec.repositories")
 @RequiredArgsConstructor
@@ -30,14 +39,15 @@ public class SpringConfig implements WebMvcConfigurer {
 
     private final Environment env;
 
+    
     @Bean
     public DataSource dataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
 
-        dataSource.setDriverClassName(env.getRequiredProperty("hibernate.driver_class"));
-        dataSource.setUrl(env.getRequiredProperty("hibernate.connection.url"));
-        dataSource.setUsername(env.getRequiredProperty("hibernate.connection.username"));
-        dataSource.setPassword(env.getRequiredProperty("hibernate.connection.password"));
+        dataSource.setDriverClassName(env.getRequiredProperty("datasource.driver_class"));
+        dataSource.setUrl(env.getRequiredProperty("datasource.url"));
+        dataSource.setUsername(env.getRequiredProperty("datasource.username"));
+        dataSource.setPassword(env.getRequiredProperty("datasource.password"));
 
         return dataSource;
     }
