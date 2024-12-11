@@ -1,20 +1,12 @@
 package by.clevertec.config;
 
 import by.clevertec.util.YamlPropertyLoader;
-import lombok.Data;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
-import org.springframework.beans.factory.config.YamlPropertiesFactoryBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
-import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.core.env.Environment;
-import org.springframework.core.env.StandardEnvironment;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.JpaTransactionManager;
@@ -39,7 +31,14 @@ public class SpringConfig implements WebMvcConfigurer {
 
     private final Environment env;
 
-    
+//    @Bean
+//    public SpringLiquibase liquibase(){
+//        SpringLiquibase liquibase = new SpringLiquibase();
+//        liquibase.setChangeLog("classpath:liquibase");
+//        liquibase.setDataSource(dataSource());
+//        return liquibase;
+//    }
+//
     @Bean
     public DataSource dataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();

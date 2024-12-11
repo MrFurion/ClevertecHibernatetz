@@ -49,6 +49,10 @@ dependencies {
     // Database dependencies
     implementation 'org.postgresql:postgresql:42.6.0'
 
+    // liquibase
+    implementation group: 'org.liquibase', name: 'liquibase-core', version: '4.10.0'
+
+
     // Servlet API (provided, as it is handled by the server)
     providedCompile 'javax.servlet:javax.servlet-api:4.0.1'
     testImplementation platform('org.junit:junit-bom:5.10.0')
