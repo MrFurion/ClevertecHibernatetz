@@ -1,0 +1,14 @@
+# Database Configuration (Data Source)
+datasource:
+  url: jdbc:postgresql://localhost:5433/hibernate
+  driver_class: org.postgresql.Driver
+  username: root
+  password: root
+
+# Hibernate Settings
+hibernate:
+  dialect: org.hibernate.dialect.PostgreSQLDialect
+  show_sql: true
+
+liquibase:
+  changelog: changelog/changelog-master.yaml
